@@ -5,14 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body{
-            background: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1));
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: #f2f2f2;
-        }
     </style>
     <title>IO | Inicio</title>
 </head>
@@ -28,9 +20,6 @@
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
               <a href="#" class="btn waves-effect lastRegister waves-light black control" style="width: 350px;">Panel de Control</a>
-          </div>
-          <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn waves-effect dashboard waves-light black users" style="width: 350px;">Usuarios</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
               <a href="#" class="btn waves-effect dashboard waves-light black resumen-admin" style="width: 350px;">Resumenes</a>
