@@ -18,63 +18,54 @@
                     <label for="searchMovement">Buscar...</label>
                 </div>
                 <div class="col s6 m7 l7">
-                    <a href="#newCategory" class="btn right grey lighten-5 modal-trigger"><i class="material-icons" style="color: #000 !important;">add</i></a>
+                    <a href="#!" id="newMovement" class="btn right grey lighten-5"><i class="material-icons" style="color: #000 !important;">add</i></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
+                        <select name="" id="select-type">
                             <option value="" disabled selected>Tipo</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
+                            <option value="input">INGRESO</option>
+                            <option value="output">EGRESO</option>
                         </select>
                     </div>
                 </div>
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
+                        <select name="" id="select-cat">
                             <option value="" disabled selected>Categoria</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
                         </select>
                     </div>
                 </div>
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
+                        <select name="" id="select-met">
                             <option value="" disabled selected>Método de pago</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
                         </select>
                     </div>
                 </div>
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
+                        <select name="" id="select-user">
                             <option value="" disabled selected>Usuario</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
                         </select>
                     </div>
                 </div>
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
-                            <option value="" disabled selected>Fecha inicio</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
+                        <input type="text" id="dateI" class="datepicker" name="dateI">
+                        <label for="dateI">Fecha Inicio</label>
                     </div>
                 </div>
                 <div class="col s6 m2 l2">
                     <div class="input-field">
-                        <select name="" id="state-met">
-                            <option value="" disabled selected>Fecha fin</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
+                        <input type="text" id="dateF" class="datepicker" name="dateF">
+                        <label for="dateF">Fecha Fin</label>
                     </div>
+                </div>
+                <div class="col s12 m12 l12">
+                    <a href="#!" id="cleanFilter" class="btn right grey lighten-5"><span style="color: #000;">Limpiar</span></a>
                 </div>
             </div>
             <div class="col s12 m12 l12">
@@ -98,14 +89,130 @@
                 </table>
             </div>
         </div>
+        <!-- Nuvo movimiento -->
+        <div class="hide row row-newMovement">
+            <a href="#" class="back-movements col s6 m6 l6" style="margin-top: 30px"><i class="material-icons prefix" style="color: #000 !important;">arrow_back</i></a>
+            <div id="new-movement" class="col s12 m8 l8 offset-m2 offset-l2 center-align">
+                <div class="card horizontal hoverable">
+                    <div class="card-content">
+                        <span class="card-title left-align text-flow">REGISTRO DE MOVIMIENTO</span>
+                        <div class="divider"></div>
+                        <div class="input-field col s12 m12 l12">
+                            <div class="input-field">
+                                <select name="" id="type-movement">
+                                    <option value="" disabled selected>Tipo</option>
+                                    <option value="input">INGRESO</option>
+                                    <option value="output">EGRESO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <select name="" id="type-cat">
+                                <option value="0" disabled selected>Tipo de categoria</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <select name="" id="type-method">
+                                <option value="0" disabled selected>Tipo de metodo</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s6 m6 l6 mt">
+                            <input type="text" id="date" class="datepicker" name="date">
+                            <label for="date">Fecha</label>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <input type="number" id="amount" class="activate" name="amount">
+                            <label for="amount">Monto</label>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <input type="text" id="reason" class="activate" name="reason">
+                            <label for="reason">Razón</label>
+                        </div>
+                        <div class="input-field col s6 m6 l6 left">
+                            <input type="text" id="detail" class="activate" name="detail">
+                            <label for="detail">Detalle</label>
+                        </div>
+                        <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-movement">Aceptar</button>
+                        <div class="preloader-wrapper movement-wrapper hide small right active">
+                            <div class="spinner-layer spinner-red-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
     </div>
     <script>
         // Variables de entorno
+        var selectedTypeCat;
+        var selectedTypeMethod;
+        var selectedTypeMov;
+        var selectedCat = '/all';
+        var selectedMet = '/all';
+        var selectedMov = 'all';
+        var selectedUser = '/all';
+        var dateInit = '';
+        var dateFinish = '';
+        var paramMovement;
         // 
         // Funciones iniciales
         $(document).ready(function () {
-            getMovements();
+            getMovements('', '');
             searchMovement();
+            getMethods('#select-met');
+            getUsers();
+            $("#type-cat").change(function(){
+                selectedTypeCat = $(this).children("option:selected").val();
+                console.log(selectedTypeCat);
+            });
+            $("#type-method").change(function(){
+                selectedTypeMethod = $(this).children("option:selected").val();
+                console.log(selectedTypeMethod);
+            });
+            $("#type-movement").change(function(){
+                selectedTypeMov = $(this).children("option:selected").val();
+                console.log(selectedTypeMov);
+                // Elimina todas las categorias y agrega una genérica. Esto para poder hacer un append de las cat de E o S
+                $('#type-cat').find('option').remove().end().append('<option value="0">Tipo de categoria</option>').val('whatever');
+                getCategories(selectedTypeMov, '#type-cat');
+            });
+            $("#select-type").change(function(){
+                selectedMov = $(this).children("option:selected").val();
+                console.log(selectedMov);
+                // Elimina todas las categorias y agrega una genérica. Esto para poder hacer un append de las cat de E o S
+                $('#select-cat').find('option').remove().end().append('<option value="0">Tipo de categoria</option>').val('whatever');
+                getCategories(selectedMov,'#select-cat');
+                getMovements('', '');
+            });
+            $("#select-cat").change(function(){
+                selectedCat = $(this).children("option:selected").val();
+                console.log(selectedCat);
+                getMovements('', '');
+            });
+            $("#select-met").change(function(){
+                selectedMet = $(this).children("option:selected").val();
+                console.log(selectedMet);
+                getMovements('', '');
+            });
+            $("#select-user").change(function(){
+                selectedUser = $(this).children("option:selected").val();
+                console.log(selectedUser);
+                getMovements('', '');
+            });
+            $('#dateF').change(function (e) { 
+                e.preventDefault();
+                var dateI = $('input[name=dateI]').val();
+                var dateF = $(this).val();
+                getMovements(dateI, dateF);
+            });
         });
         // 
         // Manejo de vistas
@@ -113,12 +220,80 @@
             e.preventDefault();
             window.location = '../home/index.php'
         });
+        $('.back-movements').click(function (e) { 
+            e.preventDefault();
+            window.location = '../home/movements.php'
+        });
+        $('#newMovement').click(function (e) { 
+            e.preventDefault();
+            $('.row-movements').addClass('hide');
+            $('.row-newMovement').removeClass('hide');
+            getMethods('#type-method');
+        });
         // 
         // Funciones
-        function getMovements(){
-            $.ajax({
+        function getMovements(date1, date2){
+            if (date2 == '') {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser,
+                    dataType: "json",
+                    success: function (response) {
+                    console.log(response);
+                    let row = response.result;
+                    let html = [];
+                    for (let i=0; i < row.length; i++){
+                    var state = row[i].enabled;
+                    if (state == '1') {
+                        state = 'Activo';
+                    }else{
+                        state = 'Inactivo';
+                    }
+                    var rol = row[i].role;
+                    if (rol == '1') {
+                        rol = 'Administrador';
+                    }
+                    if (rol == '2') {
+                        rol = 'Usuario';
+                    }
+                    var cancel = row[i].canceled;
+                    if (cancel == null) {
+                        cancel = 'Activo';
+                    }else{
+                        cancel = 'Cancelado'
+                    }
+                    html.push(
+                    `<tr movementID="${row[i].idmovement}" class="content">
+                        <td>${row[i].description}</td>  
+                        <td>${row[i].denomination}</td>  
+                        <td>${row[i].reason}</td>  
+                        <td>${row[i].detail}</td>  
+                        <td>${row[i].amount}</td>  
+                        <td>${row[i].direction}</td>  
+                        <td>${row[i].date.split(' ')[0]}</td>  
+                        <td>${cancel}</td>  
+                        <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
+                        <td></td> 
+                    </tr>`
+                    );
+                }  
+                $('.movements-table>tbody').html(html.join(''));
+                $('select').formSelect();
+                $('.datepicker').datepicker({
+                    format: "yyyy-mm-dd"
+                });
+                $('.drop-movement').click(function (e) { 
+                    e.preventDefault();
+                    var element = $(this)[0].parentElement.parentElement;
+                    paramMovement = $(element).attr('movementID');
+                    dropMovement();
+                });
+                }
+            });
+            }else{
+                $.ajax({
                 type: "GET",
-                url: "http://localhost/io-api/public/movements/get/all/all/all/all",
+                url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + date1 + '/' + date2,
                 dataType: "json",
                 success: function (response) {
                     let row = response.result;
@@ -144,22 +319,161 @@
                         cancel = 'Cancelado'
                     }
                     html.push(
-                    `<tr methodID="${row[i].idmovement}" class="content">
+                    `<tr movementID="${row[i].idmovement}" class="content">
                         <td>${row[i].description}</td>  
                         <td>${row[i].denomination}</td>  
                         <td>${row[i].reason}</td>  
                         <td>${row[i].detail}</td>  
                         <td>${row[i].amount}</td>  
                         <td>${row[i].direction}</td>  
-                        <td>${row[i].registered}</td>  
+                        <td>${row[i].date.split(' ')[0]}</td>  
                         <td>${cancel}</td>  
-                        <td><a href="#" class="btn cat-edit"><i class="material-icons">delete</i></a></td> 
+                        <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
                         <td></td> 
                     </tr>`
                     );
                 }  
                 $('.movements-table>tbody').html(html.join(''));
                 $('select').formSelect();
+                $('.datepicker').datepicker({
+                    format: "yyyy-mm-dd"
+                });
+                $('.drop-movement').click(function (e) { 
+                    e.preventDefault();
+                    var element = $(this)[0].parentElement.parentElement;
+                    paramMovement = $(element).attr('movementID');
+                    dropMovement();
+                });
+                }
+            });
+            }
+        }
+        function getCategories(type, id){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/io-api/public/settings/get/" + type + '/' + '1',
+                dataType: "json",
+                success: function (response) {
+                    let rows = response.result;
+                    let html = [];
+                    for (let i=0; i < rows.length; i++){
+                        html.push(
+                            `
+                            <option value="${rows[i].idcategorie}">${rows[i].description}</option>
+                            `
+                        );
+                    }    
+                    $(id).append(html.join(''));
+                    $('select').formSelect();
+                }
+            });
+        }
+        function getMethods(id){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/io-api/public/settings/get/paymentmethods/1",
+                dataType: "json",
+                success: function (response) {
+                    let rows = response.result;
+                    let html = [];
+                    for (let i=0; i < rows.length; i++){
+                        html.push(
+                            `
+                            <option value="${rows[i].idpaymentmethod}">${rows[i].denomination}</option>
+                            `
+                        );
+                    }    
+                    $(id).append(html.join(''));
+                    $('select').formSelect();
+                }
+            });
+        }
+        function getUsers(){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/io-api/public/users/get",
+                dataType: "json",
+                success: function (response) {
+                    let rows = response.result;
+                    let html = [];
+                    for (let i=0; i < rows.length; i++){
+                        html.push(
+                            `
+                            <option value="${rows[i].iduser}">${rows[i].name} ${rows[i].surname}</option>
+                            `
+                        );
+                    }    
+                    $('#select-user').append(html.join(''));
+                    $('select').formSelect();
+                }
+            });
+        }
+        $('.send-movement').click(function (e) { 
+            e.preventDefault();
+            $('.send-movement').addClass('hide');
+            $('.movement-wrapper').removeClass('hide');
+            var idcategorie = selectedTypeCat;
+            var idpaymentmethod = selectedTypeMethod;
+            var date = $('input[name=date]').val();
+            var amount = $('input[name=amount]').val();
+            var direction = selectedTypeMov;
+            var reason = $('input[name=reason]').val();
+            var detail = $('input[name=detail]').val();
+            var data;
+            if (selectedTypeMov == 'input') {
+                data = {
+                    "idcategorie": idcategorie,
+                    "idpaymentmethod": idpaymentmethod,
+                    "date": date,
+                    "amount": amount,
+                    "direction": direction,
+                    "reason": reason,
+                    "detail": detail
+                }
+            }else{
+                data = {
+                    "idcategorie": idcategorie,
+                    "idpaymentmethod": idpaymentmethod,
+                    "date": date,
+                    "amount": amount,
+                    "direction": direction,
+                    "reason": reason,
+                    "detail": detail,
+                    "iduser": user_id
+                }
+            }
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/io-api/public/movements/register",
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    M.toast({html: '¡Movimiento creado correctamente!'});
+                    $('.send-movement').removeClass('hide');
+                    $('.movement-wrapper').addClass('hide');
+                    getMovements('', '');
+                },
+                error: function(){
+                    M.toast({html: 'Error al crear movimiento, compruebe los datos'});
+                    $('.send-movement').removeClass('hide');
+                    $('.movement-wrapper').addClass('hide');
+                }
+            });
+        });
+        function dropMovement(){
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/io-api/public/movements/drop",
+                data: {
+                    "id": paramMovement    
+                },
+                dataType: "json",
+                success: function (response) {
+                    M.toast({html: 'Movimiento cancelado correctamente'});
+                    getMovements('', '');
+                },
+                error: function(){
+                    M.toast({html: 'Error al cancelar movimiento'});
                 }
             });
         }
@@ -173,6 +487,12 @@
                 });
             });
         }
+        // 
+        // Limpiar filtro
+        $('#cleanFilter').click(function (e) { 
+            e.preventDefault();
+            window.location = '../home/movements.php';
+        });
         //  
     </script>
 </body>
