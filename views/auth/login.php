@@ -14,7 +14,7 @@ if(!empty($_SESSION['ID'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         body{
-            background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7));
+            background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)), url('../../assets/img/background-auth.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -35,8 +35,12 @@ if(!empty($_SESSION['ID'])){
             margin-top: 10px !important;
         }
         h1.margin-col{
-            margin-bottom: 10px !important;
-            margin-top: 20px !important;
+            margin-bottom: 30px !important;
+            margin-top: 30px !important;
+        }
+        h5.margin-col{
+            margin-bottom: 30px !important;
+            margin-top: 30px !important;
         }
         .mt {
             margin-top: 20px !important;
@@ -48,7 +52,6 @@ if(!empty($_SESSION['ID'])){
     <div class="container">
         <div class="row">
             <h1 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">¡Bienvenido!</h1>
-            <h3 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">SYSTEM IO</h3>
             <div class="col s12 m6 l6 offset-m3 offset-l3 center-align">
                 <div class="card horizontal hoverable">
                     <div class="card-content">
@@ -79,7 +82,7 @@ if(!empty($_SESSION['ID'])){
                     </div>
                 </div>
             </div>
-                <h5 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">SYSTEM IO</h5>
+                <h5 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">SISTEMA DE MOVIMIENTOS</h5>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

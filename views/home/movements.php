@@ -26,8 +26,8 @@
                     <div class="input-field">
                         <select name="" id="select-type">
                             <option value="" disabled selected>Tipo</option>
-                            <option value="input">INGRESO</option>
-                            <option value="output">EGRESO</option>
+                            <option value="input">ENTRADA</option>
+                            <option value="output">SALIDA</option>
                         </select>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                             <th>TIPO</th>
                             <th>FECHA</th>
                             <th>ESTADO</th>
-                            <th>CANCELAR</th>
+                            <th>ANULAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,8 +101,8 @@
                             <div class="input-field">
                                 <select name="" id="type-movement">
                                     <option value="" disabled selected>Tipo</option>
-                                    <option value="input">INGRESO</option>
-                                    <option value="output">EGRESO</option>
+                                    <option value="input">ENTRADA</option>
+                                    <option value="output">SALIDA</option>
                                 </select>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                         <td>${row[i].direction}</td>  
                         <td>${row[i].date.split(' ')[0]}</td>  
                         <td>${cancel}</td>  
-                        <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
+                        <td><a href="#" class="btn drop-movement red"><i class="material-icons">delete</i></a></td> 
                         <td></td> 
                     </tr>`
                     );

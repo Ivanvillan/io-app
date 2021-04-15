@@ -4,6 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    a.btn-flat{
+        width: 350px; 
+        border: 1px solid #8c8b87; 
+        border-radius: 10px;
+    }
+    a.btn-flat:hover{
+        background-color: #4f5250;
+        color: #fff;
+      }
+      .tabs .tab a{
+            color:#000 !important;
+        } /*Black color to the text*/
+
+        .tabs .tab a:hover {
+            background-color:#98b9eb !important;
+            color:#000 !important;
+        } /*Text color on hover*/
+
+        .tabs .tab a.active {
+            background-color:#abccff !important;
+            color:#000 !important;
+        } /*Background and text color when a tab is active*/
+
+        .tabs .indicator {
+            background-color:#0D47A1 !important;
+        }
+    </style>
     <title>IO | Panel de Control</title>
 </head>
 <body>
@@ -12,14 +40,15 @@
         <!-- Vista principal -->
         <div class="row row-settings">
             <a href="#" class="back-home col s1 m1 l1" style="margin-top: 30px"><i class="material-icons prefix" style="color: #000 !important;">arrow_back</i></a>
-            <div class="col s12 m12 l12 center-align" style="margin-top: 80px;">
-                <a href="#" class="btn waves-effect waves-light black category" style="width: 350px;">Categorias</a>
+            <h1 class="col s10 m10 l10 center-align margin-col text-flow">PANEL DE CONTROL</h1>
+            <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
+                <a href="#" class="btn btn-flat category">Categorias</a>
             </div>
             <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-                <a href="#" class="btn waves-effect lastRegister waves-light black method" style="width: 350px;">Métodos de pago</a>
+                <a href="#" class="btn btn-flat lastRegister waves-light method">Métodos de pago</a>
             </div>
             <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-                <a href="#" class="btn waves-effect dashboard waves-light black register" style="width: 350px;">Usuarios</a>
+                <a href="#" class="btn btn-flat dashboard waves-light register">Usuarios</a>
             </div>
         </div>
         <!--  -->
@@ -73,8 +102,8 @@
                     <div class="input-field">
                         <select name="" id="type-cat">
                             <option value="" disabled selected>Tipo</option>
-                            <option value="input">Ingreso</option>
-                            <option value="output">Egreso</option>
+                            <option value="input">ENTRADA</option>
+                            <option value="output">SALIDA</option>
                         </select>
                     </div>
                 </div>
@@ -82,8 +111,8 @@
                     <div class="input-field">
                         <select name="" id="state-cat">
                             <option value="" disabled selected>Estado</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
+                            <option value="1">ACTIVO</option>
+                            <option value="0">INACTIVO</option>
                         </select>
                     </div>
                 </div>
@@ -192,8 +221,8 @@
                     <div class="input-field">
                         <select name="" id="state-met">
                             <option value="" disabled selected>Estado</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
+                            <option value="1">ACTIVO</option>
+                            <option value="0">INACTIVO</option>
                         </select>
                     </div>
                 </div>
@@ -230,8 +259,8 @@
                         <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
                             <select name="" id="state-editMethod">
                                 <option value="" disabled selected>Estado</option>
-                                <option value="1">Habilitado</option>
-                                <option value="0">Inactivo</option>
+                                <option value="1">ACTIVO</option>
+                                <option value="0">INACTIVO</option>
                             </select>
                         </div>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-editMethodpayment">Aceptar</button>
@@ -369,8 +398,8 @@
                         <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
                             <select name="" id="state-editUser">
                                 <option value="" disabled selected>Estado</option>
-                                <option value="1">Habilitado</option>
-                                <option value="0">Inactivo</option>
+                                <option value="1">ACTIVO</option>
+                                <option value="0">INACTIVO</option>
                             </select>
                         </div>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-editRegister">Aceptar</button>
@@ -734,15 +763,15 @@
                     for (let i=0; i < row.length; i++){
                     var state = row[i].enabled;
                     if (state == '1') {
-                        state = 'Activo';
+                        state = 'ACTIVO';
                     }else{
-                        state = 'Inactivo';
+                        state = 'INACTIVO';
                     }
                     var direction = row[i].direction;
                     if (direction == '1') {
-                        direction = 'Ingreso';
+                        direction = 'ENTRADA';
                     }else{
-                        direction = 'Egreso';
+                        direction = 'SALIDA';
                     }
                     html.push(
                     `<tr categoryID="${row[i].idcategorie}" class="content">
@@ -750,7 +779,7 @@
                         <td>${direction}</td> 
                         <td>${state}</td> 
                         <td>${row[i].created}</td> 
-                        <td><a href="#" class="btn cat-edit"><i class="material-icons">edit</i></a></td> 
+                        <td><a href="#" class="btn cat-edit teal darken-2"><i class="material-icons">edit</i></a></td> 
                         <td></td> 
                     </tr>`
                     );
@@ -762,7 +791,7 @@
                     $('.row-editCategories').removeClass('hide');
                     $('input[name="ed-category"]').val($(this).parent().parent().find('td').eq(0).html());
                     var stateUpdate = state;
-                    if (stateUpdate == 'Activo' ) {
+                    if (stateUpdate == 'ACTIVO' ) {
                         stateUpdate = '1';
                     }else{
                         stateUpdate = '2';
@@ -786,16 +815,16 @@
                     for (let i=0; i < row.length; i++){
                     var state = row[i].enabled;
                     if (state == '1') {
-                        state = 'Activo';
+                        state = 'ACTIVO';
                     }else{
-                        state = 'Inactivo';
+                        state = 'INACTIVO';
                     }
                     html.push(
                     `<tr methodID="${row[i].idpaymentmethod}" class="content">
                         <td>${row[i].denomination}</td>  
                         <td>${state}</td> 
                         <td>${row[i].created}</td> 
-                        <td><a href="#" class="btn met-edit"><i class="material-icons">edit</i></a></td> 
+                        <td><a href="#" class="btn met-edit teal darken-2"><i class="material-icons">edit</i></a></td> 
                         <td></td> 
                     </tr>`
                     );
@@ -807,7 +836,7 @@
                     $('.row-methodpayment').addClass('hide');
                     $('input[name="ed-method"]').val($(this).parent().parent().find('td').eq(0).html());
                     var stateUpdate = state;
-                    if (stateUpdate == 'Activo' ) {
+                    if (stateUpdate == 'ACTIVO' ) {
                         stateUpdate = '1';
                     }else{
                         stateUpdate = '2';
@@ -831,9 +860,9 @@
                     for (let i=0; i < row.length; i++){
                     var state = row[i].enabled;
                     if (state == '1') {
-                        state = 'Activo';
+                        state = 'ACTIVO';
                     }else{
-                        state = 'Inactivo';
+                        state = 'INACTIVO';
                     }
                     var rol = row[i].role;
                     if (rol == '1') {
@@ -850,7 +879,7 @@
                         <td>${rol}</td>  
                         <td>${state}</td> 
                         <td>${row[i].created}</td> 
-                        <td><a href="#" class="btn user-edit"><i class="material-icons">edit</i></a></td> 
+                        <td><a href="#" class="btn user-edit teal darken-2"><i class="material-icons">edit</i></a></td> 
                         <td></td> 
                     </tr>`
                     );
@@ -871,7 +900,7 @@
                     }
                     typeEditUser = rolUpdate;
                     var stateUpdate = state;
-                    if (stateUpdate == 'Activo' ) {
+                    if (stateUpdate == 'ACTIVO' ) {
                         stateUpdate = '1';
                     }else{
                         stateUpdate = '2';

@@ -5,6 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        a.btn{
+          width: 350px; 
+          border: 1px solid #8c8b87; 
+          border-radius: 10px;
+        }
+        a.btn:hover{
+        background-color: #4f5250;
+        color: #fff;
+      }
     </style>
     <title>IO | Inicio</title>
 </head>
@@ -12,34 +21,23 @@
   <?php include('../provider/provider.php') ?>
   <div class="container">
       <div class="hide row row-admin">
-          <div class="col s12 m12 l12 center-align" style="margin-top: 100px;">
-              <img class="responsive-img" width="400" height="250" src=""> 
-          </div>
-          <div class="col s12 m12 l12 center-align" style="margin-top: 80px;">
-              <a href="#" class="btn waves-effect waves-light black movements-admin" style="width: 350px;">Movimientos</a>
+          <h1 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">INICIO</h1>
+          <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
+              <a href="#" class="btn btn-flat movements-admin">Movimientos</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn waves-effect lastRegister waves-light black control" style="width: 350px;">Panel de Control</a>
+              <a href="#" class="btn btn-flat lastRegister control">Panel de Control</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn waves-effect dashboard waves-light black resumen-admin" style="width: 350px;">Resumenes</a>
-          </div>
-          <div class="col s12 m12 l12 center-align" style="margin-top: 140px;">
-              <img class="responsive-img" width="150" height="120" src="">
+              <a href="#" class="btn btn-flat dashboard resumen-admin">Resumenes</a>
           </div>
       </div>
       <div class="hide row row-client">
-          <div class="col s12 m12 l12 center-align" style="margin-top: 100px;">
-              <img class="responsive-img" width="400" height="250" src=""> 
-          </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 80px;">
-              <a href="#" class="btn waves-effect waves-light black movements-client" style="width: 350px;">Movimientos</a>
+              <a href="#" class="btn btn-flat waves-light movements-client" style="width: 350px;">Movimientos</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn waves-effect lastRegister waves-light black resumen-client" style="width: 350px;">Resumen</a>
-          </div>
-          <div class="col s12 m12 l12 center-align" style="margin-top: 140px;">
-              <img class="responsive-img" width="150" height="120" src="">
+              <a href="#" class="btn btn-flat lastRegister waves-light resumen-client" style="width: 350px;">Resumen</a>
           </div>
       </div>
   </div>
