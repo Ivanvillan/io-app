@@ -24,7 +24,7 @@
         } /*Text color on hover*/
 
         .tabs .tab a.active {
-            background-color:#abccff !important;
+            background-color:#b3ccf2 !important;
             color:#000 !important;
         } /*Background and text color when a tab is active*/
 

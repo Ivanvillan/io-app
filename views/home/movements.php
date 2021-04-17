@@ -169,6 +169,13 @@
             searchMovement();
             getMethods('#select-met');
             getUsers();
+            $("#type-movement").change(function(){
+                selectedTypeMov = $(this).children("option:selected").val();
+                console.log(selectedTypeMov);
+                // Elimina todas las categorias y agrega una genérica. Esto para poder hacer un append de las cat de E o S
+                $('#type-cat').find('option').remove().end().append('<option value="0" selected>Tipo de categoria</option>').val('whatever');
+                getCategories(selectedTypeMov, '#type-cat');
+            });
             $("#type-cat").change(function(){
                 selectedTypeCat = $(this).children("option:selected").val();
                 console.log(selectedTypeCat);
@@ -177,33 +184,26 @@
                 selectedTypeMethod = $(this).children("option:selected").val();
                 console.log(selectedTypeMethod);
             });
-            $("#type-movement").change(function(){
-                selectedTypeMov = $(this).children("option:selected").val();
-                console.log(selectedTypeMov);
-                // Elimina todas las categorias y agrega una genérica. Esto para poder hacer un append de las cat de E o S
-                $('#type-cat').find('option').remove().end().append('<option value="0">Tipo de categoria</option>').val('whatever');
-                getCategories(selectedTypeMov, '#type-cat');
-            });
             $("#select-type").change(function(){
                 selectedMov = $(this).children("option:selected").val();
                 console.log(selectedMov);
                 // Elimina todas las categorias y agrega una genérica. Esto para poder hacer un append de las cat de E o S
-                $('#select-cat').find('option').remove().end().append('<option value="0">Tipo de categoria</option>').val('whatever');
+                $('#select-cat').find('option').remove().end().append('<option value="0" selected>Tipo de categoria</option>').val('whatever');
                 getCategories(selectedMov,'#select-cat');
                 getMovements('', '');
             });
             $("#select-cat").change(function(){
-                selectedCat = $(this).children("option:selected").val();
+                selectedCat = '/' + $(this).children("option:selected").val();
                 console.log(selectedCat);
                 getMovements('', '');
             });
             $("#select-met").change(function(){
-                selectedMet = $(this).children("option:selected").val();
+                selectedMet = '/' + $(this).children("option:selected").val();
                 console.log(selectedMet);
                 getMovements('', '');
             });
             $("#select-user").change(function(){
-                selectedUser = $(this).children("option:selected").val();
+                selectedUser = '/' + $(this).children("option:selected").val();
                 console.log(selectedUser);
                 getMovements('', '');
             });
