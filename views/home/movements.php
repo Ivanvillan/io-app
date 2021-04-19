@@ -45,7 +45,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col s6 m2 l2">
+                <div class="col s6 m2 l2 hide select-enabled">
                     <div class="input-field">
                         <select name="" id="select-user">
                             <option value="" disabled selected>Usuario</option>
@@ -168,7 +168,6 @@
             getMovements('', '');
             searchMovement();
             getMethods('#select-met');
-            getUsers();
             $("#type-movement").change(function(){
                 selectedTypeMov = $(this).children("option:selected").val();
                 console.log(selectedTypeMov);
@@ -231,122 +230,261 @@
             getMethods('#type-method');
         });
         // 
-        // Funciones
+        // Funcion estadística (data1 = fecha inicio data2 = fecha fin)
         function getMovements(date1, date2){
-            if (date2 == '') {
-                $.ajax({
+            // Comparación si es usuario administrador o cliente
+            if (user_role == '1') {
+                // ejecutar funcion traer usuarios y habilitar el filtro por usuario
+                getUsers();
+                $('.select-enabled').removeClass('hide');
+                // Filtrar si no es por fecha
+                if (date2 == '') {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser,
+                        dataType: "json",
+                        success: function (response) {
+                        console.log(response);
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        var state = row[i].enabled;
+                        if (state == '1') {
+                            state = 'Activo';
+                        }else{
+                            state = 'Inactivo';
+                        }
+                        var rol = row[i].role;
+                        if (rol == '1') {
+                            rol = 'Administrador';
+                        }
+                        if (rol == '2') {
+                            rol = 'Usuario';
+                        }
+                        var cancel = row[i].canceled;
+                        if (cancel == null) {
+                            cancel = 'Activo';
+                        }else{
+                            cancel = 'Cancelado'
+                        }
+                        html.push(
+                        `<tr movementID="${row[i].idmovement}" class="content">
+                            <td>${row[i].description}</td>  
+                            <td>${row[i].denomination}</td>  
+                            <td>${row[i].reason}</td>  
+                            <td>${row[i].detail}</td>  
+                            <td>${row[i].amount}</td>  
+                            <td>${row[i].direction}</td>  
+                            <td>${row[i].date.split(' ')[0]}</td>  
+                            <td>${cancel}</td>  
+                            <td><a href="#" class="btn drop-movement red"><i class="material-icons">delete</i></a></td> 
+                            <td></td> 
+                        </tr>`
+                        );
+                    }  
+                    $('.movements-table>tbody').html(html.join(''));
+                    $('select').formSelect();
+                    $('.datepicker').datepicker({
+                        format: "yyyy-mm-dd"
+                    });
+                    $('.drop-movement').click(function (e) { 
+                        e.preventDefault();
+                        var element = $(this)[0].parentElement.parentElement;
+                        paramMovement = $(element).attr('movementID');
+                        dropMovement();
+                    });
+                    }
+                });
+                }else{
+                    $.ajax({
                     type: "GET",
-                    url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser,
+                    url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + date1 + '/' + date2,
                     dataType: "json",
                     success: function (response) {
-                    console.log(response);
-                    let row = response.result;
-                    let html = [];
-                    for (let i=0; i < row.length; i++){
-                    var state = row[i].enabled;
-                    if (state == '1') {
-                        state = 'Activo';
-                    }else{
-                        state = 'Inactivo';
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        var state = row[i].enabled;
+                        if (state == '1') {
+                            state = 'Activo';
+                        }else{
+                            state = 'Inactivo';
+                        }
+                        var rol = row[i].role;
+                        if (rol == '1') {
+                            rol = 'Administrador';
+                        }
+                        if (rol == '2') {
+                            rol = 'Usuario';
+                        }
+                        var cancel = row[i].canceled;
+                        if (cancel == null) {
+                            cancel = 'Activo';
+                        }else{
+                            cancel = 'Cancelado'
+                        }
+                        html.push(
+                        `<tr movementID="${row[i].idmovement}" class="content">
+                            <td>${row[i].description}</td>  
+                            <td>${row[i].denomination}</td>  
+                            <td>${row[i].reason}</td>  
+                            <td>${row[i].detail}</td>  
+                            <td>${row[i].amount}</td>  
+                            <td>${row[i].direction}</td>  
+                            <td>${row[i].date.split(' ')[0]}</td>  
+                            <td>${cancel}</td>  
+                            <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
+                            <td></td> 
+                        </tr>`
+                        );
+                    }  
+                    $('.movements-table>tbody').html(html.join(''));
+                    $('select').formSelect();
+                    $('.datepicker').datepicker({
+                        format: "yyyy-mm-dd"
+                    });
+                    $('.drop-movement').click(function (e) { 
+                        e.preventDefault();
+                        var element = $(this)[0].parentElement.parentElement;
+                        paramMovement = $(element).attr('movementID');
+                        dropMovement();
+                    });
                     }
-                    var rol = row[i].role;
-                    if (rol == '1') {
-                        rol = 'Administrador';
-                    }
-                    if (rol == '2') {
-                        rol = 'Usuario';
-                    }
-                    var cancel = row[i].canceled;
-                    if (cancel == null) {
-                        cancel = 'Activo';
-                    }else{
-                        cancel = 'Cancelado'
-                    }
-                    html.push(
-                    `<tr movementID="${row[i].idmovement}" class="content">
-                        <td>${row[i].description}</td>  
-                        <td>${row[i].denomination}</td>  
-                        <td>${row[i].reason}</td>  
-                        <td>${row[i].detail}</td>  
-                        <td>${row[i].amount}</td>  
-                        <td>${row[i].direction}</td>  
-                        <td>${row[i].date.split(' ')[0]}</td>  
-                        <td>${cancel}</td>  
-                        <td><a href="#" class="btn drop-movement red"><i class="material-icons">delete</i></a></td> 
-                        <td></td> 
-                    </tr>`
-                    );
-                }  
-                $('.movements-table>tbody').html(html.join(''));
-                $('select').formSelect();
-                $('.datepicker').datepicker({
-                    format: "yyyy-mm-dd"
-                });
-                $('.drop-movement').click(function (e) { 
-                    e.preventDefault();
-                    var element = $(this)[0].parentElement.parentElement;
-                    paramMovement = $(element).attr('movementID');
-                    dropMovement();
                 });
                 }
-            });
             }else{
-                $.ajax({
-                type: "GET",
-                url: "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + date1 + '/' + date2,
-                dataType: "json",
-                success: function (response) {
-                    let row = response.result;
-                    let html = [];
-                    for (let i=0; i < row.length; i++){
-                    var state = row[i].enabled;
-                    if (state == '1') {
-                        state = 'Activo';
+                if (date2 == '') {
+                    var user;
+                    if (selectedMov == 'input') {
+                        user = 'all'
                     }else{
-                        state = 'Inactivo';
+                        user = user_id;
                     }
-                    var rol = row[i].role;
-                    if (rol == '1') {
-                        rol = 'Administrador';
+                    var url = "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + '/' + user;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                        console.log(response);
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        var state = row[i].enabled;
+                        if (state == '1') {
+                            state = 'Activo';
+                        }else{
+                            state = 'Inactivo';
+                        }
+                        var rol = row[i].role;
+                        if (rol == '1') {
+                            rol = 'Administrador';
+                        }
+                        if (rol == '2') {
+                            rol = 'Usuario';
+                        }
+                        var cancel = row[i].canceled;
+                        if (cancel == null) {
+                            cancel = 'Activo';
+                        }else{
+                            cancel = 'Cancelado'
+                        }
+                        html.push(
+                        `<tr movementID="${row[i].idmovement}" class="content">
+                            <td>${row[i].description}</td>  
+                            <td>${row[i].denomination}</td>  
+                            <td>${row[i].reason}</td>  
+                            <td>${row[i].detail}</td>  
+                            <td>${row[i].amount}</td>  
+                            <td>${row[i].direction}</td>  
+                            <td>${row[i].date.split(' ')[0]}</td>  
+                            <td>${cancel}</td>  
+                            <td><a href="#" class="btn drop-movement red"><i class="material-icons">delete</i></a></td> 
+                            <td></td> 
+                        </tr>`
+                        );
+                    }  
+                    $('.movements-table>tbody').html(html.join(''));
+                    $('select').formSelect();
+                    $('.datepicker').datepicker({
+                        format: "yyyy-mm-dd"
+                    });
+                    $('.drop-movement').click(function (e) { 
+                        e.preventDefault();
+                        var element = $(this)[0].parentElement.parentElement;
+                        paramMovement = $(element).attr('movementID');
+                        dropMovement();
+                    });
                     }
-                    if (rol == '2') {
-                        rol = 'Usuario';
-                    }
-                    var cancel = row[i].canceled;
-                    if (cancel == null) {
-                        cancel = 'Activo';
-                    }else{
-                        cancel = 'Cancelado'
-                    }
-                    html.push(
-                    `<tr movementID="${row[i].idmovement}" class="content">
-                        <td>${row[i].description}</td>  
-                        <td>${row[i].denomination}</td>  
-                        <td>${row[i].reason}</td>  
-                        <td>${row[i].detail}</td>  
-                        <td>${row[i].amount}</td>  
-                        <td>${row[i].direction}</td>  
-                        <td>${row[i].date.split(' ')[0]}</td>  
-                        <td>${cancel}</td>  
-                        <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
-                        <td></td> 
-                    </tr>`
-                    );
-                }  
-                $('.movements-table>tbody').html(html.join(''));
-                $('select').formSelect();
-                $('.datepicker').datepicker({
-                    format: "yyyy-mm-dd"
                 });
-                $('.drop-movement').click(function (e) { 
-                    e.preventDefault();
-                    var element = $(this)[0].parentElement.parentElement;
-                    paramMovement = $(element).attr('movementID');
-                    dropMovement();
+                }else{
+                    var user;
+                    if (selectedMov == 'input') {
+                        user = 'all'
+                    }else{
+                        user = user_id;
+                    }
+                    var url = "http://localhost/io-api/public/movements/get/" + selectedMov + selectedCat + selectedMet + '' + user + '/' + date1 + '/' + date2;
+                    console.log(url);
+                    $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        var state = row[i].enabled;
+                        if (state == '1') {
+                            state = 'Activo';
+                        }else{
+                            state = 'Inactivo';
+                        }
+                        var rol = row[i].role;
+                        if (rol == '1') {
+                            rol = 'Administrador';
+                        }
+                        if (rol == '2') {
+                            rol = 'Usuario';
+                        }
+                        var cancel = row[i].canceled;
+                        if (cancel == null) {
+                            cancel = 'Activo';
+                        }else{
+                            cancel = 'Cancelado'
+                        }
+                        html.push(
+                        `<tr movementID="${row[i].idmovement}" class="content">
+                            <td>${row[i].description}</td>  
+                            <td>${row[i].denomination}</td>  
+                            <td>${row[i].reason}</td>  
+                            <td>${row[i].detail}</td>  
+                            <td>${row[i].amount}</td>  
+                            <td>${row[i].direction}</td>  
+                            <td>${row[i].date.split(' ')[0]}</td>  
+                            <td>${cancel}</td>  
+                            <td><a href="#" class="btn drop-movement"><i class="material-icons">delete</i></a></td> 
+                            <td></td> 
+                        </tr>`
+                        );
+                    }  
+                    $('.movements-table>tbody').html(html.join(''));
+                    $('select').formSelect();
+                    $('.datepicker').datepicker({
+                        format: "yyyy-mm-dd"
+                    });
+                    $('.drop-movement').click(function (e) { 
+                        e.preventDefault();
+                        var element = $(this)[0].parentElement.parentElement;
+                        paramMovement = $(element).attr('movementID');
+                        dropMovement();
+                    });
+                    }
                 });
                 }
-            });
             }
+            // fin comparación
         }
         function getCategories(type, id){
             $.ajax({

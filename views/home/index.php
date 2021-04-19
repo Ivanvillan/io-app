@@ -33,11 +33,12 @@
           </div>
       </div>
       <div class="hide row row-client">
-          <div class="col s12 m12 l12 center-align" style="margin-top: 80px;">
-              <a href="#" class="btn btn-flat waves-light movements-client" style="width: 350px;">Movimientos</a>
+          <h1 class="col s12 m6 l6 offset-m3 offset-l3 center-align margin-col text-flow">INICIO</h1>
+          <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
+              <a href="#" class="btn btn-flat movements-client" style="width: 350px;">Movimientos</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn btn-flat lastRegister waves-light resumen-client" style="width: 350px;">Resumen</a>
+              <a href="#" class="btn btn-flat lastRegister resumen-client" style="width: 350px;">Resumen</a>
           </div>
       </div>
   </div>
@@ -63,7 +64,7 @@
       e.preventDefault();
       window.location = '../home/resumen.php';
     });
-    $('.movements-clien').click(function (e) { 
+    $('.movements-client').click(function (e) { 
       e.preventDefault();
       window.location = '../home/movements.php';
     });

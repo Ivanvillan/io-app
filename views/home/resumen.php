@@ -35,7 +35,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s6 m2 l2">
+                    <div class="col s6 m2 l2 hide select-enabled">
                         <div class="input-field">
                             <select name="" id="select-user">
                                 <option value="" disabled selected>Usuario</option>
@@ -58,9 +58,11 @@
                         <a href="#!" id="cleanFilter" class="btn right grey lighten-5"><span style="color: #000;">Limpiar</span></a>
                     </div>
                 </div>
-            <div class="col s12 m12 l12">
-                <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
+                <div class="row">
+                    <div class="col s12 m12 l12" id="draw">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -75,12 +77,13 @@
         // 
         // Funciones iniciales
         $(document).ready(function () {
+            console.log(user_role);
+            console.log(user_id);
             $('select').formSelect();
             $('.datepicker').datepicker({
                 format: "yyyy-mm-dd"
             });
             getMethods();
-            getUsers();
             getData('', '');
             $("#select-type").change(function(){
                 selectedMov = $(this).children("option:selected").val();
@@ -113,27 +116,235 @@
             });
         });
         // 
-        // Funciones
+        // Funcion estadística (data1 = fecha inicio data2 = fecha fin)
         function getData(data1, data2){
-            if (data2 == '') {
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser,
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response.result);
+            // Elimina el canvas y lo vuelve a crear al ejecutar la funcion para volver a cargar los datos
+            $('#draw').find('canvas').remove().end().append('<canvas id="myChart" style="height: 100px !important"></canvas>');
+            // Comparación si es usuario administrador o cliente
+            if (user_role == '1') {
+                // ejecutar funcion traer usuarios y habilitar el filtro por usuario
+                getUsers();
+                $('.select-enabled').removeClass('hide');
+                // Filtrar si no es por fecha
+                if (data2 == '') {
+                    var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.result.length == 1) {
+                                var direccion = response.result[0].direction;
+                                var cant = response.result[0].quantity;
+                                var monto = response.result[0].amount;
+                                
+                            }else{
+                                var direccion = '';
+                                var cant = 0;
+                                var monto = 0;
+                            }
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                type: 'horizontalBar',
+                                data: {
+                                    labels: ['Cantidad', 'Monto'],
+                                    datasets: [{
+                                        label: direccion,
+                                        data: [cant, monto],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 3
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                            ticks: {
+                                                min: 0 // Edit the value according to what you need
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            stacked: true
+                                        }]
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + data1 + '/' + data2;
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            console.log(url);
+                            if (response.result.length == 1) {
+                                var direccion = response.result[0].direction;
+                                var cant = response.result[0].quantity;
+                                var monto = response.result[0].amount;
+                                
+                            }else{
+                                var direccion = '';
+                                var cant = 0;
+                                var monto = 0;
+                            }
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Cantidad', 'Monto'],
+                                    datasets: [{
+                                        label: direccion,
+                                        data: [cant, monto],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }   
+            }else{
+                if (data2 == '') {
+                    var user;
+                    if (selectedMov == 'input') {
+                        user = 'all'
+                    }else{
+                        user = user_id;
                     }
-                });
-            }else
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + date1 + '/' + date2,
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response.result);
+                    var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + '/' + user;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.result.length == 1) {
+                                var direccion = response.result[0].direction;
+                                var cant = response.result[0].quantity;
+                                var monto = response.result[0].amount;
+                                
+                            }else{
+                                var direccion = '';
+                                var cant = 0;
+                                var monto = 0;
+                            }
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                type: 'horizontalBar',
+                                data: {
+                                    labels: ['Cantidad', 'Monto'],
+                                    datasets: [{
+                                        label: direccion,
+                                        data: [cant, monto],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 3
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                            ticks: {
+                                                min: 0 // Edit the value according to what you need
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            stacked: true
+                                        }]
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    var user;
+                    if (selectedMov == 'input') {
+                        user = 'all'
+                    }else{
+                        user = user_id;
                     }
-                });
+                    var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + '/' + user + '/' + data1 + '/' + data2;
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            console.log(url);
+                            if (response.result.length == 1) {
+                                var direccion = response.result[0].direction;
+                                var cant = response.result[0].quantity;
+                                var monto = response.result[0].amount;
+                                
+                            }else{
+                                var direccion = '';
+                                var cant = 0;
+                                var monto = 0;
+                            }
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Cantidad', 'Monto'],
+                                    datasets: [{
+                                        label: direccion,
+                                        data: [cant, monto],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+            }   
+
         }
+        // Fin de la comparación
+    }
         function getCategories(){
             $.ajax({
                 type: "GET",
@@ -199,6 +410,10 @@
         $('.back-home').click(function (e) { 
             e.preventDefault();
             window.location = '../home/index.php'
+        });
+        $('#cleanFilter').click(function (e) { 
+            e.preventDefault();
+            window.location = '../home/resumen.php'
         });
         // 
     </script>
