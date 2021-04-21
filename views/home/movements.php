@@ -89,7 +89,7 @@
                 </table>
             </div>
         </div>
-        <!-- Nuvo movimiento -->
+        <!-- Nuevo movimiento -->
         <div class="hide row row-newMovement">
             <a href="#" class="back-movements col s6 m6 l6" style="margin-top: 30px"><i class="material-icons prefix" style="color: #000 !important;">arrow_back</i></a>
             <div id="new-movement" class="col s12 m8 l8 offset-m2 offset-l2 center-align">
@@ -97,41 +97,43 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">REGISTRO DE MOVIMIENTO</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12">
-                            <div class="input-field">
-                                <select name="" id="type-movement">
-                                    <option value="" disabled selected>Tipo</option>
-                                    <option value="input">ENTRADA</option>
-                                    <option value="output">SALIDA</option>
+                        <form action="" id="form-newMovement">
+                            <div class="input-field col s12 m12 l12">
+                                <div class="input-field">
+                                    <select name="" id="type-movement">
+                                        <option value="" disabled selected>Tipo</option>
+                                        <option value="input">ENTRADA</option>
+                                        <option value="output">SALIDA</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field col s6 m6 l6">
+                                <select name="" id="type-cat">
+                                    <option value="0" disabled selected>Tipo de categoria</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="input-field col s6 m6 l6">
-                            <select name="" id="type-cat">
-                                <option value="0" disabled selected>Tipo de categoria</option>
-                            </select>
-                        </div>
-                        <div class="input-field col s6 m6 l6">
-                            <select name="" id="type-method">
-                                <option value="0" disabled selected>Tipo de metodo</option>
-                            </select>
-                        </div>
-                        <div class="input-field col s6 m6 l6 mt">
-                            <input type="text" id="date" class="datepicker" name="date">
-                            <label for="date">Fecha</label>
-                        </div>
-                        <div class="input-field col s6 m6 l6">
-                            <input type="number" id="amount" class="activate" name="amount">
-                            <label for="amount">Monto</label>
-                        </div>
-                        <div class="input-field col s6 m6 l6">
-                            <input type="text" id="reason" class="activate" name="reason">
-                            <label for="reason">Razón</label>
-                        </div>
-                        <div class="input-field col s6 m6 l6 left">
-                            <input type="text" id="detail" class="activate" name="detail">
-                            <label for="detail">Detalle</label>
-                        </div>
+                            <div class="input-field col s6 m6 l6">
+                                <select name="" id="type-method">
+                                    <option value="0" disabled selected>Tipo de metodo</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s6 m6 l6 mt">
+                                <input type="text" id="date" class="datepicker" name="date">
+                                <label for="date">Fecha</label>
+                            </div>
+                            <div class="input-field col s6 m6 l6">
+                                <input type="number" id="amount" class="activate" name="amount">
+                                <label for="amount">Monto</label>
+                            </div>
+                            <div class="input-field col s6 m6 l6">
+                                <input type="text" id="reason" class="activate" name="reason">
+                                <label for="reason">Razón</label>
+                            </div>
+                            <div class="input-field col s6 m6 l6 left">
+                                <input type="text" id="detail" class="activate" name="detail">
+                                <label for="detail">Detalle</label>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-movement">Aceptar</button>
                         <div class="preloader-wrapper movement-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -453,7 +455,7 @@
                         if (cancel == null) {
                             cancel = 'Activo';
                         }else{
-                            cancel = 'Cancelado'
+                            cancel = 'Anulado'
                         }
                         html.push(
                         `<tr movementID="${row[i].idmovement}" class="content">
@@ -590,6 +592,7 @@
                     M.toast({html: '¡Movimiento creado correctamente!'});
                     $('.send-movement').removeClass('hide');
                     $('.movement-wrapper').addClass('hide');
+                    $('#form-newMovement').trigger('reset');
                     getMovements('', '');
                 },
                 error: function(){
@@ -608,11 +611,11 @@
                 },
                 dataType: "json",
                 success: function (response) {
-                    M.toast({html: 'Movimiento cancelado correctamente'});
+                    M.toast({html: 'Movimiento anulado correctamente'});
                     getMovements('', '');
                 },
                 error: function(){
-                    M.toast({html: 'Error al cancelar movimiento'});
+                    M.toast({html: 'Error al anulado movimiento'});
                 }
             });
         }
