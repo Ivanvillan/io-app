@@ -64,18 +64,20 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">REGISTRO DE CATEGORIA</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">library_books</i>
-                            <input type="text" id="category" class="activate" name="category">
-                            <label for="category">Nombre de la Categoria</label>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="type-category">
-                                <option value="0" disabled selected>Tipo de categoria</option>
-                                <option value="input">Entrada</option>
-                                <option value="output">Salida</option>
-                            </select>
-                        </div>
+                        <form action="" id="form-newCat">
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">library_books</i>
+                                <input type="text" id="category" class="activate" name="category">
+                                <label for="category">Nombre de la Categoria</label>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="type-category">
+                                    <option value="0" disabled selected>Tipo de categoria</option>
+                                    <option value="input">Entrada</option>
+                                    <option value="output">Salida</option>
+                                </select>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-category">Aceptar</button>
                         <div class="preloader-wrapper category-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -142,25 +144,27 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">EDITAR CATEGORIA</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">library_books</i>
-                            <input type="text" id="ed-category" class="activate" name="ed-category">
-                            <label for="ed-category">Nombre de la Categoria</label>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="type-editCategory">
-                                <option value="0" disabled selected>Tipo de categoria</option>
-                                <option value="input">Entrada</option>
-                                <option value="output">Salida</option>
-                            </select>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="state-editCategory">
-                                <option value="" disabled selected>Estado</option>
-                                <option value="1">Habilitada</option>
-                                <option value="0">Inactiva</option>
-                            </select>
-                        </div>
+                        <form action="" id="form-editCat">
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">library_books</i>
+                                <input type="text" id="ed-category" class="activate" name="ed-category">
+                                <label for="ed-category">Nombre de la Categoria</label>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="type-editCategory">
+                                    <option value="0" disabled selected>Tipo de categoria</option>
+                                    <option value="input">Entrada</option>
+                                    <option value="output">Salida</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="state-editCategory">
+                                    <option value="" disabled selected>Estado</option>
+                                    <option value="1">Habilitada</option>
+                                    <option value="0">Inactiva</option>
+                                </select>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-editCategory">Aceptar</button>
                         <div class="preloader-wrapper editCategory-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -190,11 +194,13 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">REGISTRO DE MÉTODO DE PAGO</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">library_books</i>
-                            <input type="text" id="method" class="activate" name="method">
-                            <label for="method">Nombre del Método</label>
-                        </div>
+                        <form action="" id="form-newMethod">
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">library_books</i>
+                                <input type="text" id="method" class="activate" name="method">
+                                <label for="method">Nombre del Método</label>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-methodpayment">Aceptar</button>
                         <div class="preloader-wrapper methodpayment-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -251,18 +257,20 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">EDITAR MÉTODO DE PAGO</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">library_books</i>
-                            <input type="text" id="ed-method" class="activate" name="ed-method">
-                            <label for="ed-method">Nombre del Método</label>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="state-editMethod">
-                                <option value="" disabled selected>Estado</option>
-                                <option value="1">ACTIVO</option>
-                                <option value="0">INACTIVO</option>
-                            </select>
-                        </div>
+                        <form action="" id="form-editMethod">
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">library_books</i>
+                                <input type="text" id="ed-method" class="activate" name="ed-method">
+                                <label for="ed-method">Nombre del Método</label>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="state-editMethod">
+                                    <option value="" disabled selected>Estado</option>
+                                    <option value="1">ACTIVO</option>
+                                    <option value="0">INACTIVO</option>
+                                </select>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-editMethodpayment">Aceptar</button>
                         <div class="preloader-wrapper editMethodpayment-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -292,33 +300,35 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">REGISTRO DE USUARIO</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12 mt">
-                            <i class="material-icons prefix">face</i>
-                            <input type="text" id="name" class="activate" name="name">
-                            <label for="name">Nombre</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">account_box</i>
-                            <input type="text" id="surname" class="activate" name="surname">
-                            <label for="surname">Apellido</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">email</i>
-                            <input type="email" id="email" class="activate" name="email">
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">lock</i>
-                            <input type="password" id="password" class="activate" name="password">
-                            <label for="password">Contraseña</label>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="type-user">
-                                <option value="0" disabled selected>Tipo de usuario</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Cliente</option>
-                            </select>
-                        </div>
+                        <form action="" id="form-newRegister">
+                            <div class="input-field col s12 m12 l12 mt">
+                                <i class="material-icons prefix">face</i>
+                                <input type="text" id="name" class="activate" name="name">
+                                <label for="name">Nombre</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">account_box</i>
+                                <input type="text" id="surname" class="activate" name="surname">
+                                <label for="surname">Apellido</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">email</i>
+                                <input type="email" id="email" class="activate" name="email">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">lock</i>
+                                <input type="password" id="password" class="activate" name="password">
+                                <label for="password">Contraseña</label>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="type-user">
+                                    <option value="0" disabled selected>Tipo de usuario</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Cliente</option>
+                                </select>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-register">Aceptar</button>
                         <div class="preloader-wrapper register-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -368,40 +378,42 @@
                     <div class="card-content">
                         <span class="card-title left-align text-flow">EDITAR USUARIO</span>
                         <div class="divider"></div>
-                        <div class="input-field col s12 m12 l12 mt">
-                            <i class="material-icons prefix">face</i>
-                            <input type="text" id="ed-name" class="activate" name="ed-name">
-                            <label for="ed-name">Nombre</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">account_box</i>
-                            <input type="text" id="ed-surname" class="activate" name="ed-surname">
-                            <label for="ed-surname">Apellido</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">email</i>
-                            <input type="email" id="ed-email" class="activate" name="ed-email">
-                            <label for="ed-email">Email</label>
-                        </div>
-                        <div class="input-field col s12 m12 l12">
-                            <i class="material-icons prefix">lock</i>
-                            <input type="password" id="ed-password" class="activate" name="ed-password">
-                            <label for="ed-password">Contraseña</label>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="type-editUser">
-                                <option value="0" disabled selected>Tipo de usuario</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Cliente</option>
-                            </select>
-                        </div>
-                        <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
-                            <select name="" id="state-editUser">
-                                <option value="" disabled selected>Estado</option>
-                                <option value="1">ACTIVO</option>
-                                <option value="0">INACTIVO</option>
-                            </select>
-                        </div>
+                        <form action="" id="form-editRegister">
+                            <div class="input-field col s12 m12 l12 mt">
+                                <i class="material-icons prefix">face</i>
+                                <input type="text" id="ed-name" class="activate" name="ed-name">
+                                <label for="ed-name">Nombre</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">account_box</i>
+                                <input type="text" id="ed-surname" class="activate" name="ed-surname">
+                                <label for="ed-surname">Apellido</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">email</i>
+                                <input type="email" id="ed-email" class="activate" name="ed-email">
+                                <label for="ed-email">Email</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <i class="material-icons prefix">lock</i>
+                                <input type="password" id="ed-password" class="activate" name="ed-password">
+                                <label for="ed-password">Contraseña</label>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="type-editUser">
+                                    <option value="0" disabled selected>Tipo de usuario</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Cliente</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s12 m10 l10 offset-m2 offset-l2">
+                                <select name="" id="state-editUser">
+                                    <option value="" disabled selected>Estado</option>
+                                    <option value="1">ACTIVO</option>
+                                    <option value="0">INACTIVO</option>
+                                </select>
+                            </div>
+                        </form>
                         <button class="waves-effect waves-yellow blue-grey lighten-5 black-text btn right send-editRegister">Aceptar</button>
                         <div class="preloader-wrapper editRegister-wrapper hide small right active">
                             <div class="spinner-layer spinner-red-only">
@@ -566,7 +578,7 @@
                     M.toast({html: '¡Categoria creada correctamente!'});
                     $('.send-category').removeClass('hide');
                     $('.category-wrapper').addClass('hide');
-                    $("input[name=category]").val('');
+                    $('#form-newCat').trigger('reset');
                     getCategories();
                 },
                 error: function(){
@@ -597,7 +609,7 @@
                     M.toast({html: '¡Categoria editada correctamente!'});
                     $('.send-editCategory').removeClass('hide');
                     $('.editCategory-wrapper').addClass('hide');
-                    $("input[name=ed-category]").val('');
+                    // $('#form-editCat').trigger('reset');
                     getCategories();
                 },
                 error: function(){
@@ -623,7 +635,7 @@
                     M.toast({html: '¡Método creado correctamente!'});
                     $('.send-methodpayment').removeClass('hide');
                     $('.methodpayment-wrapper').addClass('hide');
-                    $("input[name=method]").val('');
+                    $('#form-newMethod').trigger('reset');
                     getMethods();
                 },
                 error: function(){
@@ -652,7 +664,7 @@
                     M.toast({html: '¡Método editado correctamente!'});
                     $('.send-editMethodpayment').removeClass('hide');
                     $('.editMethodpayment-wrapper').addClass('hide');
-                    $("input[name=ed-method]").val('');
+                    // $('#form-editMethod').trigger('reset');
                     getMethods();
                 },
                 error: function(){
@@ -670,7 +682,7 @@
             var surname = $("input[name=surname]").val();
             var email = $("input[name=email]").val();
             var password = $("input[name=password]").val();
-            var rol = type;
+            var rol = typeUser;
             $.ajax({
                 type: "POST",
                 url: "http://localhost/io-api/public/users/create",
@@ -686,10 +698,7 @@
                     M.toast({html: '¡Usuario creado correctamente!'});
                     $('.send-register').removeClass('hide');
                     $('.register-wrapper').addClass('hide');
-                    $("input[name=name]").val('');
-                    $("input[name=surname]").val('');
-                    $("input[name=email]").val('');
-                    $("input[name=password]").val('');
+                    $('#form-newRegister').trigger('reset');
                     getUsers();
                 },
                 error: function(){
@@ -739,10 +748,7 @@
                     M.toast({html: '¡Usuario editado correctamente!'});
                     $('.send-editRegister').removeClass('hide');
                     $('.editRegister-wrapper').addClass('hide');
-                    $("input[name=ed-name]").val('');
-                    $("input[name=ed-surname]").val('');
-                    $("input[name=ed-email]").val('');
-                    $("input[name=ed-password]").val('');
+                    // $('#form-editRegister').trigger('reset');
                     getUsers();
                 },
                 error: function(){
