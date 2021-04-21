@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col s12 m12 l12">
-                        <a href="#!" id="cleanFilter" class="btn right grey lighten-5"><span style="color: #000;">Limpiar</span></a>
+                        <a href="#!" id="cleanFilter" class="btn right grey lighten-5 tooltipped" data-position="left" data-tooltip="Limpiar Filtro"><span style="color: #000;">Limpiar</span></a>
                     </div>
                 </div>
                 <div class="row">
@@ -79,12 +79,14 @@
         $(document).ready(function () {
             console.log(user_role);
             console.log(user_id);
+            $('.tooltipped').tooltip();
             $('select').formSelect();
             $('.datepicker').datepicker({
                 format: "yyyy-mm-dd"
             });
             getMethods();
             getData('', '');
+            getUsers();
             $("#select-type").change(function(){
                 selectedMov = $(this).children("option:selected").val();
                 console.log(selectedMov);
@@ -122,8 +124,7 @@
             $('#draw').find('canvas').remove().end().append('<canvas id="myChart" style="height: 100px !important"></canvas>');
             // Comparación si es usuario administrador o cliente
             if (user_role == '1') {
-                // ejecutar funcion traer usuarios y habilitar el filtro por usuario
-                getUsers();
+                // Habilitar el filtro por usuario
                 $('.select-enabled').removeClass('hide');
                 // Filtrar si no es por fecha
                 if (data2 == '') {

@@ -18,7 +18,7 @@
                     <label for="searchMovement">Buscar...</label>
                 </div>
                 <div class="col s6 m7 l7">
-                    <a href="#!" id="newMovement" class="btn right grey lighten-5"><i class="material-icons" style="color: #000 !important;">add</i></a>
+                    <a href="#!" id="newMovement" class="btn right grey lighten-5 tooltipped" data-position="left" data-tooltip="Nuevo Movimiento"><i class="material-icons" style="color: #000 !important;">add</i></a>
                 </div>
             </div>
             <div class="row">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col s12 m12 l12">
-                    <a href="#!" id="cleanFilter" class="btn right grey lighten-5"><span style="color: #000;">Limpiar</span></a>
+                    <a href="#!" id="cleanFilter" class="btn right grey lighten-5 tooltipped" data-position="left" data-tooltip="Limpiar Filtros"><span style="color: #000;">Limpiar</span></a>
                 </div>
             </div>
             <div class="col s12 m12 l12">
@@ -167,7 +167,9 @@
         $(document).ready(function () {
             getMovements('', '');
             searchMovement();
+            getUsers();
             getMethods('#select-met');
+            $('.tooltipped').tooltip();
             $("#type-movement").change(function(){
                 selectedTypeMov = $(this).children("option:selected").val();
                 console.log(selectedTypeMov);
@@ -234,8 +236,7 @@
         function getMovements(date1, date2){
             // Comparación si es usuario administrador o cliente
             if (user_role == '1') {
-                // ejecutar funcion traer usuarios y habilitar el filtro por usuario
-                getUsers();
+                // habilitar el filtro por usuario
                 $('.select-enabled').removeClass('hide');
                 // Filtrar si no es por fecha
                 if (date2 == '') {

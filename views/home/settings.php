@@ -24,7 +24,7 @@
         } /*Text color on hover*/
 
         .tabs .tab a.active {
-            background-color:#b3ccf2 !important;
+            background-color:#d7e5fa !important;
             color:#000 !important;
         } /*Background and text color when a tab is active*/
 
@@ -338,7 +338,7 @@
                 <div class="col s12 m4 l4">
                     <div class="input-field">
                         <input type="text" id="searchUsers">
-                        <label for="searchUser">Buscar</label>
+                        <label for="searchUsers">Buscar</label>
                     </div>
                 </div>
                 <div class="col s12 m12 l12">

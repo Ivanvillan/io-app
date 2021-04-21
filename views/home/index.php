@@ -29,7 +29,7 @@
               <a href="#" class="btn btn-flat lastRegister control">Panel de Control</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn btn-flat dashboard resumen-admin">Resumenes</a>
+              <a href="#" class="btn btn-flat dashboard resumen-admin">Gráficos</a>
           </div>
       </div>
       <div class="hide row row-client">
@@ -38,7 +38,7 @@
               <a href="#" class="btn btn-flat movements-client" style="width: 350px;">Movimientos</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn btn-flat lastRegister resumen-client" style="width: 350px;">Resumen</a>
+              <a href="#" class="btn btn-flat lastRegister resumen-client" style="width: 350px;">Gráficos</a>
           </div>
       </div>
   </div>
