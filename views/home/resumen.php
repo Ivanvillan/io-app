@@ -102,13 +102,11 @@
         // 
         // Funciones iniciales
         $(document).ready(function () {
-            console.log(user_role);
-            console.log(user_id);
-            $('.tooltipped').tooltip();
-            $('select').formSelect();
             $('.datepicker').datepicker({
                 format: "yyyy-mm-dd"
             });
+            $('.tooltipped').tooltip();
+            $('select').formSelect();
             getMethods();
             getData('', '');
             getUsers();
@@ -154,54 +152,51 @@
                     var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser;
                     console.log(url);
                     $.ajax({
-                        type: "GET",
-                        url: url,
-                        dataType: "json",
-                        success: function (response) {
-                                console.log(response.result);
-                                let row = response.result;
-                                let html = [];
-                                for (let i=0; i < row.length; i++){
-                                html.push(
-                                `<tr class="content">
-                                    <td>${row[i].description}</td>  
-                                    <td>${row[i].denomination}</td>  
-                                    <td>${row[i].direction}</td>  
-                                    <td>${row[i].amount}</td>  
-                                    <td>${row[i].user}</td> 
-                                    <td></td> 
-                                </tr>`
-                                );
-                            }  
-                            $('.resume-table>tbody').html(html.join(''));
-                        }
-                    });
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        html.push(
+                            `<tr class="content">
+                                <td>${row[i].description}</td>  
+                                <td>${row[i].denomination}</td>  
+                                <td>${row[i].direction}</td>  
+                                <td>${row[i].amount}</td>  
+                                <td>${row[i].user}</td> 
+                            </tr>`
+                            );
+                        }  
+                    $('.resume-table>tbody').html(html.join(''));
+                    }
+                });
                 }else{
                     var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + selectedUser + '/' + data1 + '/' + data2;
                     $.ajax({
-                        type: "GET",
-                        url: url,
-                        dataType: "json",
-                        success: function (response) {
-                            // TABLA
-                                let row = response.result;
-                                let html = [];
-                                for (let i=0; i < row.length; i++){
-                                html.push(
-                                `<tr class="content">
-                                    <td>${row[i].description}</td>  
-                                    <td>${row[i].denomination}</td>  
-                                    <td>${row[i].direction}</td>  
-                                    <td>${row[i].amount}</td>  
-                                    <td>${row[i].user}</td> 
-                                    <td></td> 
-                                </tr>`
-                                );
-                            }  
-                            $('.resume-table>tbody').html(html.join(''));
-                        }
-                    });
-                }   
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        // TABLA
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        html.push(
+                            `<tr class="content">
+                                <td>${row[i].description}</td>  
+                                <td>${row[i].denomination}</td>  
+                                <td>${row[i].direction}</td>  
+                                <td>${row[i].amount}</td>  
+                                <td>${row[i].user}</td> 
+                            </tr>`
+                            );
+                        }  
+                    $('.resume-table>tbody').html(html.join(''));
+                    }
+                });
+            }   
             }else{
                 if (data2 == '') {
                     var user;
@@ -213,29 +208,27 @@
                     var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + '/' + user;
                     console.log(url);
                     $.ajax({
-                        type: "GET",
-                        url: url,
-                        dataType: "json",
-                        success: function (response) {
-                                console.log(response.result);
-                                // TABLA
-                                let row = response.result;
-                                let html = [];
-                                for (let i=0; i < row.length; i++){
-                                html.push(
-                                `<tr class="content">
-                                    <td>${row[i].description}</td>  
-                                    <td>${row[i].denomination}</td>  
-                                    <td>${row[i].direction}</td>  
-                                    <td>${row[i].amount}</td>  
-                                    <td>${row[i].user}</td>  
-                                    <td></td> 
-                                </tr>`
-                                );
-                            }  
-                            $('.resume-table>tbody').html(html.join(''));
-                        }
-                    });
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        // TABLA
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        html.push(
+                            `<tr class="content">
+                                <td>${row[i].description}</td>  
+                                <td>${row[i].denomination}</td>  
+                                <td>${row[i].direction}</td>  
+                                <td>${row[i].amount}</td>  
+                                <td>${row[i].user}</td>  
+                            </tr>`
+                        );
+                    }  
+                    $('.resume-table>tbody').html(html.join(''));
+                    }
+                });
                 }else{
                     var user;
                     if (selectedMov == 'input') {
@@ -245,28 +238,27 @@
                     }
                     var url = "http://localhost/io-api/public/movements/resume/" + selectedMov + selectedCat + selectedMet + '/' + user + '/' + data1 + '/' + data2;
                     $.ajax({
-                        type: "GET",
-                        url: url,
-                        dataType: "json",
-                        success: function (response) {
-                                // TABLA
-                                let row = response.result;
-                                let html = [];
-                                for (let i=0; i < row.length; i++){
-                                html.push(
-                                `<tr class="content">
-                                <td>${row[i].description}</td>  
-                                    <td>${row[i].denomination}</td>  
-                                    <td>${row[i].direction}</td>  
-                                    <td>${row[i].amount}</td>  
-                                    <td>${row[i].user}</td> 
-                                    <td></td> 
-                                </tr>`
-                                );
-                            }  
-                            $('.resume-table>tbody').html(html.join(''));
-                        }
-                    });
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        // TABLA
+                        let row = response.result;
+                        let html = [];
+                        for (let i=0; i < row.length; i++){
+                        html.push(
+                            `<tr class="content">
+                            <td>${row[i].description}</td>  
+                                <td>${row[i].denomination}</td>  
+                                <td>${row[i].direction}</td>  
+                                <td>${row[i].amount}</td>  
+                                <td>${row[i].user}</td> 
+                            </tr>`
+                        );
+                    }  
+                    $('.resume-table>tbody').html(html.join(''));
+                    }
+                });
             }   
 
         }

@@ -47,10 +47,12 @@
   </div>
   <script>
     // Variables
+    // 
+    // Funciones iniciales
     $(document).ready(function () {
       homeUser();
     });
-    // MANEJO DE VISTAS
+    // Manejo de vistas
     $('.movements-admin').click(function (e) { 
       e.preventDefault();
       window.location = '../home/movements.php';
