@@ -54,18 +54,43 @@
                             <label for="dateF">Fecha Fin</label>
                         </div>
                     </div>
-                    <div class="col s12 m12 l12">
-                        <a href="#!" id="cleanFilter" class="btn right grey lighten-5 tooltipped" data-position="left" data-tooltip="Limpiar Filtro"><span style="color: #000;">Limpiar</span></a>
+                </div>
+                <div class="row">
+                    <div class="col s6 m6 l6">
+                        <a href="#!" id="" class="btn teal darken-3 toExcel"><span>EXCEL</span></a>
+                        <a href="#!" id="" class="btn red darken-4 toPDF"><span>PDF</span></a>
+                    </div>
+                    <div class="col s6 m6 l6">
+                        <a href="#!" id="cleanFilter" class="btn grey right lighten-5 tooltipped" data-position="right" data-tooltip="Limpiar Filtro"><span style="color: #000;">Limpiar</span></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m12 l12" id="draw">
+                    <div class="col s12 m12 l12 hide col-draw" id="draw">
                         <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="col s12 m12 l12 col-table">
+                        <table class="responsive-table highlight resume-table">
+                            <thead>
+                                <tr>
+                                    <th>CATEGORIA</th>
+                                    <th>MÉTODO DE PAGO</th>
+                                    <th>TIPO</th>
+                                    <th>MONTO</th>
+                                    <th>USUARIO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script src="https://unpkg.com/jspdf@1.5.3/dist/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.3/dist/jspdf.plugin.autotable.js"></script>
     <script>
         // Variables de entorno
         var selectedMov = 'input';
@@ -120,8 +145,6 @@
         // 
         // Funcion estadística (data1 = fecha inicio data2 = fecha fin)
         function getData(data1, data2){
-            // Elimina el canvas y lo vuelve a crear al ejecutar la funcion para volver a cargar los datos
-            $('#draw').find('canvas').remove().end().append('<canvas id="myChart" style="height: 100px !important"></canvas>');
             // Comparación si es usuario administrador o cliente
             if (user_role == '1') {
                 // Habilitar el filtro por usuario
@@ -135,48 +158,22 @@
                         url: url,
                         dataType: "json",
                         success: function (response) {
-                            if (response.result.length == 1) {
-                                var direccion = response.result[0].direction;
-                                var cant = response.result[0].quantity;
-                                var monto = response.result[0].amount;
-                                
-                            }else{
-                                var direccion = '';
-                                var cant = 0;
-                                var monto = 0;
-                            }
-                            var ctx = document.getElementById('myChart').getContext('2d');
-                                var myChart = new Chart(ctx, {
-                                type: 'horizontalBar',
-                                data: {
-                                    labels: ['Cantidad', 'Monto'],
-                                    datasets: [{
-                                        label: direccion,
-                                        data: [cant, monto],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                        ],
-                                        borderWidth: 3
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        xAxes: [{
-                                            ticks: {
-                                                min: 0 // Edit the value according to what you need
-                                            }
-                                        }],
-                                        yAxes: [{
-                                            stacked: true
-                                        }]
-                                    }
-                                }
-                            });
+                                console.log(response.result);
+                                let row = response.result;
+                                let html = [];
+                                for (let i=0; i < row.length; i++){
+                                html.push(
+                                `<tr class="content">
+                                    <td>${row[i].description}</td>  
+                                    <td>${row[i].denomination}</td>  
+                                    <td>${row[i].direction}</td>  
+                                    <td>${row[i].amount}</td>  
+                                    <td>${row[i].user}</td> 
+                                    <td></td> 
+                                </tr>`
+                                );
+                            }  
+                            $('.resume-table>tbody').html(html.join(''));
                         }
                     });
                 }else{
@@ -186,45 +183,22 @@
                         url: url,
                         dataType: "json",
                         success: function (response) {
-                            console.log(response);
-                            console.log(url);
-                            if (response.result.length == 1) {
-                                var direccion = response.result[0].direction;
-                                var cant = response.result[0].quantity;
-                                var monto = response.result[0].amount;
-                                
-                            }else{
-                                var direccion = '';
-                                var cant = 0;
-                                var monto = 0;
-                            }
-                            var ctx = document.getElementById('myChart').getContext('2d');
-                                var myChart = new Chart(ctx, {
-                                type: 'pie',
-                                data: {
-                                    labels: ['Cantidad', 'Monto'],
-                                    datasets: [{
-                                        label: direccion,
-                                        data: [cant, monto],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                }
-                            });
+                            // TABLA
+                                let row = response.result;
+                                let html = [];
+                                for (let i=0; i < row.length; i++){
+                                html.push(
+                                `<tr class="content">
+                                    <td>${row[i].description}</td>  
+                                    <td>${row[i].denomination}</td>  
+                                    <td>${row[i].direction}</td>  
+                                    <td>${row[i].amount}</td>  
+                                    <td>${row[i].user}</td> 
+                                    <td></td> 
+                                </tr>`
+                                );
+                            }  
+                            $('.resume-table>tbody').html(html.join(''));
                         }
                     });
                 }   
@@ -243,48 +217,23 @@
                         url: url,
                         dataType: "json",
                         success: function (response) {
-                            if (response.result.length == 1) {
-                                var direccion = response.result[0].direction;
-                                var cant = response.result[0].quantity;
-                                var monto = response.result[0].amount;
-                                
-                            }else{
-                                var direccion = '';
-                                var cant = 0;
-                                var monto = 0;
-                            }
-                            var ctx = document.getElementById('myChart').getContext('2d');
-                                var myChart = new Chart(ctx, {
-                                type: 'horizontalBar',
-                                data: {
-                                    labels: ['Cantidad', 'Monto'],
-                                    datasets: [{
-                                        label: direccion,
-                                        data: [cant, monto],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                        ],
-                                        borderWidth: 3
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        xAxes: [{
-                                            ticks: {
-                                                min: 0 // Edit the value according to what you need
-                                            }
-                                        }],
-                                        yAxes: [{
-                                            stacked: true
-                                        }]
-                                    }
-                                }
-                            });
+                                console.log(response.result);
+                                // TABLA
+                                let row = response.result;
+                                let html = [];
+                                for (let i=0; i < row.length; i++){
+                                html.push(
+                                `<tr class="content">
+                                    <td>${row[i].description}</td>  
+                                    <td>${row[i].denomination}</td>  
+                                    <td>${row[i].direction}</td>  
+                                    <td>${row[i].amount}</td>  
+                                    <td>${row[i].user}</td>  
+                                    <td></td> 
+                                </tr>`
+                                );
+                            }  
+                            $('.resume-table>tbody').html(html.join(''));
                         }
                     });
                 }else{
@@ -300,45 +249,22 @@
                         url: url,
                         dataType: "json",
                         success: function (response) {
-                            console.log(response);
-                            console.log(url);
-                            if (response.result.length == 1) {
-                                var direccion = response.result[0].direction;
-                                var cant = response.result[0].quantity;
-                                var monto = response.result[0].amount;
-                                
-                            }else{
-                                var direccion = '';
-                                var cant = 0;
-                                var monto = 0;
-                            }
-                            var ctx = document.getElementById('myChart').getContext('2d');
-                                var myChart = new Chart(ctx, {
-                                type: 'pie',
-                                data: {
-                                    labels: ['Cantidad', 'Monto'],
-                                    datasets: [{
-                                        label: direccion,
-                                        data: [cant, monto],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                }
-                            });
+                                // TABLA
+                                let row = response.result;
+                                let html = [];
+                                for (let i=0; i < row.length; i++){
+                                html.push(
+                                `<tr class="content">
+                                <td>${row[i].description}</td>  
+                                    <td>${row[i].denomination}</td>  
+                                    <td>${row[i].direction}</td>  
+                                    <td>${row[i].amount}</td>  
+                                    <td>${row[i].user}</td> 
+                                    <td></td> 
+                                </tr>`
+                                );
+                            }  
+                            $('.resume-table>tbody').html(html.join(''));
                         }
                     });
             }   
@@ -407,6 +333,32 @@
             });
         }
         // 
+        // Exportar datos
+        $('.toExcel').click(function (e) { 
+            e.preventDefault();
+            $('.resume-table').table2excel({
+                // exclude:
+                name: "Reporte",
+                filename: "Reporte" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
+                fileext: ".xls"
+            });
+        });
+        $('.toPDF').click(function(event) {
+          var pdfsize = 'a3';
+          var doc = new jsPDF('l', 'pt', pdfsize)
+          doc.autoTable({ 
+                html: '.resume-table',  
+                startY: 60,
+                styles: {
+                fontSize: 9.5,
+                cellWidth: 'wrap'
+                },
+                columnStyles: {
+                1: {columnWidth: 'auto'}
+                }
+            })
+          doc.save("Reporte" + new Date().toISOString().replace(/[\-\:\.]/g, ""))
+        });
         // Manejo de vistas
         $('.back-home').click(function (e) { 
             e.preventDefault();

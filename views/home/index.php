@@ -7,11 +7,11 @@
     <style>
         a.btn{
           width: 350px; 
-          border: 1px solid #8c8b87; 
+          border: 1px solid #212121; 
           border-radius: 10px;
         }
         a.btn:hover{
-        background-color: #4f5250;
+        background-color: #212121;
         color: #fff;
       }
     </style>
@@ -29,7 +29,7 @@
               <a href="#" class="btn btn-flat lastRegister control">Panel de Control</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn btn-flat dashboard resumen-admin">Gráficos</a>
+              <a href="#" class="btn btn-flat dashboard resumen-admin">Resúmenes</a>
           </div>
       </div>
       <div class="hide row row-client">
@@ -38,7 +38,10 @@
               <a href="#" class="btn btn-flat movements-client" style="width: 350px;">Movimientos</a>
           </div>
           <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
-              <a href="#" class="btn btn-flat lastRegister resumen-client" style="width: 350px;">Gráficos</a>
+              <a href="#" class="btn btn-flat lastRegister resumen-client" style="width: 350px;">Resúmenes</a>
+          </div>
+          <div class="col s12 m12 l12 center-align" style="margin-top: 40px;">
+              <a href="#" class="btn btn-flat profile" style="width: 350px;">Perfil</a>
           </div>
       </div>
   </div>
@@ -71,6 +74,10 @@
     $('.resumen-client').click(function (e) { 
       e.preventDefault();
       window.location = '../home/resumen.php';
+    });
+    $('.profile').click(function (e) { 
+      e.preventDefault();
+      window.location = '../auth/profile.php';
     });
     // 
     function homeUser(){

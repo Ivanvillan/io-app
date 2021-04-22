@@ -7,11 +7,11 @@
     <style>
     a.btn-flat{
         width: 350px; 
-        border: 1px solid #8c8b87; 
+        border: 1px solid #212121; 
         border-radius: 10px;
     }
     a.btn-flat:hover{
-        background-color: #4f5250;
+        background-color: #212121;
         color: #fff;
       }
       .tabs .tab a{
@@ -431,6 +431,9 @@
             </div>
         </div>
     </div>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script src="https://unpkg.com/jspdf@1.5.3/dist/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.3/dist/jspdf.plugin.autotable.js"></script>
     <script>
         // Variables de entorno
         var typeCat;
@@ -920,7 +923,6 @@
             });
         }
         // 
-        // Buscadores
         function searchCat(){
             $("#searchCat").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
